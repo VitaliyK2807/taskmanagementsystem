@@ -1,6 +1,5 @@
 package com.example.taskmanagementsystem.web.model;
 
-import com.example.taskmanagementsystem.model.Tasks;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

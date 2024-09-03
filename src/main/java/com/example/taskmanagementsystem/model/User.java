@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "users")
 public class User {
@@ -34,7 +34,12 @@ public class User {
     private List<Tasks> executors = new ArrayList<>();
 
     @Column(name = "email", nullable = false)
-    private String eMail;
+    private String email;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    @Builder.Default
+    private List<Role> roles = new ArrayList<>();
 
     @Column(name = "password", nullable = false)
     private String password;

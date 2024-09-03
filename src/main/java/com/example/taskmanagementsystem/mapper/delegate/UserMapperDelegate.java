@@ -18,7 +18,7 @@ public abstract class UserMapperDelegate implements UserMapper {
         return User.builder()
                 .name(request.getName())
                 .telephone(request.getTelephone())
-                .eMail(request.getEmail())
+                .email(request.getEmail())
                 .password(request.getPassword())
                 .build();
     }
@@ -38,7 +38,7 @@ public abstract class UserMapperDelegate implements UserMapper {
         return UserResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .email(user.getEMail())
+                .email(user.getEmail())
                 .authorship(getTasks(user.getAuthorship()))
                 .executors(getTasks(user.getExecutors()))
                 .build();

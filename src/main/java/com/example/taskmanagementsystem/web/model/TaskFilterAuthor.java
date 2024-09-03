@@ -1,5 +1,7 @@
 package com.example.taskmanagementsystem.web.model;
 
+import com.example.taskmanagementsystem.model.Priority;
+import com.example.taskmanagementsystem.model.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,5 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TaskFilterAuthor {
 
-    private Long userId;
+    private Integer pageSize;
+    private Integer pageNumber;
+    private Long authorId;
+    private String priority;
+    private String status;
 }

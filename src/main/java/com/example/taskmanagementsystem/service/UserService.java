@@ -1,6 +1,8 @@
 package com.example.taskmanagementsystem.service;
 
+import com.example.taskmanagementsystem.model.Role;
 import com.example.taskmanagementsystem.model.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,7 +12,9 @@ public interface UserService {
 
     User findById(Long id);
 
-    User save(User user);
+    User findByUserEmail(String username);
+
+    User save(User user, Role role);
 
     User update(User user);
 

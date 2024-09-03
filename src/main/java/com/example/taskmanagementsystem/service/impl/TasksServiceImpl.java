@@ -4,11 +4,13 @@ import com.example.taskmanagementsystem.excepcions.EntityNotFoundException;
 import com.example.taskmanagementsystem.model.Tasks;
 import com.example.taskmanagementsystem.model.User;
 import com.example.taskmanagementsystem.repositories.TasksRepository;
+import com.example.taskmanagementsystem.repositories.specification.TaskSpecification;
 import com.example.taskmanagementsystem.service.TasksService;
 import com.example.taskmanagementsystem.service.UserService;
 import com.example.taskmanagementsystem.utils.BeanUtils;
 import com.example.taskmanagementsystem.web.model.TaskFilterAuthor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -23,7 +25,8 @@ public class TasksServiceImpl implements TasksService {
 
     @Override
     public List<Tasks> filterByAuthor(TaskFilterAuthor filter) {
-        return tasksRepository.findAllByAuthorId(filter.getUserId());
+        return tasksRepository.findAll(TaskSpecification.withFilter(filter),
+                PageRequest.of(filter.getPageNumber(), filter.getPageSize())).getContent();
     }
 
     @Override
