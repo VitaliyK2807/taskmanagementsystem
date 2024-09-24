@@ -2,8 +2,10 @@ package com.example.taskmanagementsystem.service.impl;
 
 import com.example.taskmanagementsystem.excepcions.EntityNotFoundException;
 import com.example.taskmanagementsystem.model.Role;
+import com.example.taskmanagementsystem.model.Tasks;
 import com.example.taskmanagementsystem.model.User;
 import com.example.taskmanagementsystem.repositories.RoleRepository;
+import com.example.taskmanagementsystem.repositories.TasksRepository;
 import com.example.taskmanagementsystem.repositories.UserRepository;
 import com.example.taskmanagementsystem.service.RoleService;
 import com.example.taskmanagementsystem.service.UserService;
@@ -11,6 +13,7 @@ import com.example.taskmanagementsystem.utils.BeanUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -23,6 +26,7 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleService roleService;
+    private final TasksRepository tasksRepository;
 
 
     @Override
@@ -46,6 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User save(User user, Role role) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User createdUser = userRepository.save(user);
@@ -57,6 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User update(User user) {
         User existedUser = findById(user.getId());
 
@@ -68,5 +74,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public User saveWithTasks(User user, List<Tasks> tasks) {
+        User savedUser = userRepository.save(user);
+
+        for(Tasks task : tasks) {
+            task.setAuthor(savedUser);
+            Tasks savedTask = tasksRepository.save(task);
+            savedUser.addTaskForAuthor(savedTask);
+        }
+
+        return savedUser;
     }
 }

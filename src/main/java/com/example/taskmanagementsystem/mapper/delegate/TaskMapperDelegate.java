@@ -3,6 +3,7 @@ package com.example.taskmanagementsystem.mapper.delegate;
 import com.example.taskmanagementsystem.mapper.TasksMapper;
 import com.example.taskmanagementsystem.model.Tasks;
 import com.example.taskmanagementsystem.service.UserService;
+import com.example.taskmanagementsystem.web.model.TaskRequest;
 import com.example.taskmanagementsystem.web.model.TaskResponse;
 import com.example.taskmanagementsystem.web.model.TasksListResponse;
 import com.example.taskmanagementsystem.web.model.UpsertTaskRequest;
@@ -28,6 +29,18 @@ public abstract class TaskMapperDelegate implements TasksMapper {
                 .priority(request.getPriority())
                 .status(request.getStatus())
                 .author(userService.findById(request.getAuthorId()))
+                .executor(userService.findById(request.getExecutorId()))
+                .commentary(request.getCommentary())
+                .build();
+    }
+
+    @Override
+    public Tasks requestToTask(TaskRequest request) {
+        return Tasks.builder()
+                .name(request.getTask())
+                .description(request.getDescription())
+                .priority(request.getPriority())
+                .status(request.getStatus())
                 .executor(userService.findById(request.getExecutorId()))
                 .commentary(request.getCommentary())
                 .build();

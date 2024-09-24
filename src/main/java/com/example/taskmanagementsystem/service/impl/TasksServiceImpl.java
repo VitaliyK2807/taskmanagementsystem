@@ -10,8 +10,10 @@ import com.example.taskmanagementsystem.service.UserService;
 import com.example.taskmanagementsystem.utils.BeanUtils;
 import com.example.taskmanagementsystem.web.model.TaskFilterAuthor;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -43,11 +45,13 @@ public class TasksServiceImpl implements TasksService {
     }
 
     @Override
+    @Transactional
     public Tasks save(Tasks task) {
         return tasksRepository.save(task);
     }
 
     @Override
+    @Transactional
     public Tasks update(Tasks task) {
         User author = userService.findById(task.getAuthor().getId());
         User executor = userService.findById(task.getExecutor().getId());

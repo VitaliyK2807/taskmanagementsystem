@@ -1,7 +1,5 @@
 package com.example.taskmanagementsystem.web.model;
 
-import com.example.taskmanagementsystem.model.Priority;
-import com.example.taskmanagementsystem.model.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

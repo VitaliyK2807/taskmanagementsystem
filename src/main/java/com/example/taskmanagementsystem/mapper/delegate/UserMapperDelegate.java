@@ -3,6 +3,7 @@ package com.example.taskmanagementsystem.mapper.delegate;
 import com.example.taskmanagementsystem.mapper.UserMapper;
 import com.example.taskmanagementsystem.model.Tasks;
 import com.example.taskmanagementsystem.model.User;
+import com.example.taskmanagementsystem.web.model.CreateUserWithTaskRequest;
 import com.example.taskmanagementsystem.web.model.TaskResponse;
 import com.example.taskmanagementsystem.web.model.UpsertUserRequest;
 import com.example.taskmanagementsystem.web.model.UserResponse;
@@ -15,6 +16,16 @@ public abstract class UserMapperDelegate implements UserMapper {
 
     @Override
     public User requestToUser(UpsertUserRequest request) {
+        return User.builder()
+                .name(request.getName())
+                .telephone(request.getTelephone())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .build();
+    }
+
+    @Override
+    public User requestToUser(CreateUserWithTaskRequest request) {
         return User.builder()
                 .name(request.getName())
                 .telephone(request.getTelephone())
@@ -57,4 +68,5 @@ public abstract class UserMapperDelegate implements UserMapper {
                 .priority(task.getPriority().name())
                 .build();
     }
+
 }

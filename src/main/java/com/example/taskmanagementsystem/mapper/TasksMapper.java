@@ -2,6 +2,7 @@ package com.example.taskmanagementsystem.mapper;
 
 import com.example.taskmanagementsystem.mapper.delegate.TaskMapperDelegate;
 import com.example.taskmanagementsystem.model.Tasks;
+import com.example.taskmanagementsystem.web.model.TaskRequest;
 import com.example.taskmanagementsystem.web.model.TaskResponse;
 import com.example.taskmanagementsystem.web.model.TasksListResponse;
 import com.example.taskmanagementsystem.web.model.UpsertTaskRequest;
@@ -14,6 +15,8 @@ import java.util.List;
 public interface TasksMapper {
 
     Tasks requestToTask(UpsertTaskRequest request);
+
+    Tasks requestToTask(TaskRequest request);
 
     @Mapping(source = "taskId", target = "id")
     Tasks requestToTask(Long taskId, UpsertTaskRequest request);

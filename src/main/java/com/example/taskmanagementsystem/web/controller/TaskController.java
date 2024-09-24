@@ -34,7 +34,7 @@ public class TaskController {
             description = "Get list of tasks"
     )
     @GetMapping("/filter")
-    public ResponseEntity<TasksListResponse> filterByAuthor(TaskFilterAuthor filter) {
+    public ResponseEntity<TasksListResponse> filterByUser(TaskFilterAuthor filter) {
         return ResponseEntity.ok(
                 mapper.taskListToTaskListResponse(tasksService.filterByAuthor(filter))
         );

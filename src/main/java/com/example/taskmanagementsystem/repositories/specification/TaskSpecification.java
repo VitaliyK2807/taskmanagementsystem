@@ -18,7 +18,7 @@ public interface TaskSpecification {
                 return null;
             }
 
-            return criteriaBuilder.equal(root.get("author"), authorId);
+            return criteriaBuilder.equal(root.get("author").get("id"), authorId);
         });
     }
 

@@ -44,4 +44,14 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    public void addTaskForAuthor(Tasks task) {
+        if (task == null) authorship = new ArrayList<>();
+        authorship.add(task);
+    }
+
+    public void addTaskForExecutors(Tasks task) {
+        if (task == null) executors = new ArrayList<>();
+        executors.add(task);
+    }
+
 }

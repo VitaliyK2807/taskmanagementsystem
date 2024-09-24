@@ -2,7 +2,6 @@ package com.example.taskmanagementsystem.service;
 
 import com.example.taskmanagementsystem.model.Tasks;
 import com.example.taskmanagementsystem.web.model.TaskFilterAuthor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
